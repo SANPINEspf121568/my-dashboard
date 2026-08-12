@@ -21,9 +21,15 @@
   .badge{font-size:12px;padding:5px 12px;border-radius:99px;border:1px solid;background:var(--card);border-color:var(--line);color:var(--ink2)}
   .badge.warn{background:var(--warn-soft);border-color:var(--warn-line);color:var(--warn)}
   .badge.ok{background:var(--ok-soft);border-color:var(--ok-line);color:var(--ok)}
-  .tabs{display:flex;gap:6px;margin-bottom:16px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:5px;width:fit-content}
+  .tabbar{display:flex;gap:6px;margin-bottom:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:5px;width:fit-content}
   .tab{border:none;background:transparent;padding:8px 18px;border-radius:8px;font-size:13px;cursor:pointer;color:var(--ink2);font-family:inherit}
   .tab.on{background:var(--pri);color:#fff;font-weight:500}
+  .dimbar{display:flex;gap:4px;margin-bottom:14px}
+  .dim{flex:1;max-width:150px;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 14px;cursor:pointer;text-align:left;font-family:inherit;transition:all .15s}
+  .dim:hover{border-color:var(--pri)}
+  .dim.on{border-color:var(--pri);background:var(--pri-soft)}
+  .dim .t{font-size:13px;font-weight:600;color:var(--ink)}
+  .dim .s{font-size:11px;color:var(--ink2);margin-top:2px}
   .view{display:none}.view.on{display:block}
   .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:14px}
   .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
@@ -60,7 +66,7 @@
   .bar-fill{height:100%;border-radius:99px;background:var(--pri)}
   .pct{font-size:12px;color:var(--ink2);width:34px;text-align:right}
   footer{margin-top:18px;font-size:12px;color:var(--ink2)}
-  @media(max-width:860px){.grid2{grid-template-columns:1fr}.ch{height:200px}}
+  @media(max-width:860px){.grid2{grid-template-columns:1fr}.ch{height:200px}.dim{max-width:none}}
 </style>
 </head>
 <body>
@@ -68,67 +74,168 @@
 <!-- ============================================================
      ▼▼▼ 每天只需要改这一个 DATA 对象，页面会自动全部更新 ▼▼▼
      自动化脚本 / Accio 每日定时任务改的也是这里
+     三档数据：day（今日）/ week（本周）/ month（本月）
      ============================================================ -->
 <script>
 var DATA = {
-  shop:      "我的国际站店铺",              // 店铺 / 公司名
-  date:      "数据日期 2026-08-10",          // 数据日期（数据参谋 T-2 离线，8/12 拉取）
-  updatedAt: "8/12 自动拉取",                // 更新时间说明
-  health:    { text: "需关注 · 2 项红灯", level: "warn" },   // level: ok / warn / bad
+  shop:      "我的国际站店铺",          // 店铺 / 公司名
+  updatedAt: "8/13 自动拉取",           // 更新时间说明
+  dateNote:  "数据参谋 T-2 离线 · 最新完整日 8/10 · 订单为实时",
 
-  // ① 老板视图 KPI（真实数据：2026-08-10）
-  kpis: [
-    { name:"新增询盘",  value:"5",         delta:"↑ 2 vs 昨日 · 同行优 8", dir:"up",   status:"ok"   },
-    { name:"回复率",    value:"100%",      delta:"30日均 · 目标 ≥95%",     dir:"up",   status:"ok"   },
-    { name:"5分钟回复率",value:"77.8%",    delta:"30日均 · 同行优 79.2%",  dir:"up",   status:"ok"   },
-    { name:"今日曝光",  value:"1,874",     delta:"↑ 140 vs 昨日",          dir:"up",   status:"ok"   },
-    { name:"成交订单",  value:"0",         delta:"⚠ 近7日 0 单",            dir:"down", status:"bad"  },
-    { name:"优品数",    value:"3",         delta:"⚠ 同行优 33 个",          dir:"down", status:"warn" }
-  ],
+  // 三档时间维度，每档一套完整数据
+  dims: {
+    // ---------- 今日（2026-08-10） ----------
+    day: {
+      label: "今日",
+      sub:   "8月10日",
+      kpis: [
+        { name:"新增询盘",  value:"5",        delta:"↑ 2 vs 昨日 · 同行优 8", dir:"up",   status:"ok"   },
+        { name:"回复率",    value:"100%",     delta:"30日均 · 目标 ≥95%",     dir:"up",   status:"ok"   },
+        { name:"5分钟回复率",value:"77.8%",   delta:"30日均 · 同行优 79.2%",  dir:"up",   status:"ok"   },
+        { name:"今日曝光",  value:"1,874",    delta:"↑ 140 vs 昨日",          dir:"up",   status:"ok"   },
+        { name:"成交订单",  value:"0",        delta:"⚠ 今日 0 单",             dir:"down", status:"bad"  },
+        { name:"优品数",    value:"3",        delta:"⚠ 同行优 33 个",          dir:"down", status:"warn" }
+      ],
+      trend: {
+        labels: ["8/1","8/2","8/3","8/4","8/5","8/6","8/7","8/8","8/9","8/10"],
+        views:      [1030,1289,629,669,729,1230,1393,1119,1734,1874],
+        inquiries:  [1,3,2,3,1,1,4,3,5,5]
+      },
+      health_panel: [
+        { label:"P4P 广告",      value:"未投放",  status:"warn", note:"同行日均曝光 151" },
+        { label:"全站推曝光",    value:"1,137",   note:"点击 31" },
+        { label:"搜索点击率",    value:"2.11%",   status:"ok", note:"同行优 1.74%" },
+        { label:"平均回复时长",  value:"0.63h",   status:"ok", note:"同行均 4.14h" },
+        { label:"优品数",        value:"3 个",    status:"warn", note:"同行优 33 个" }
+      ],
+      redFlags: [
+        { tag:"成交", level:"bad",  text:"今日 0 笔成交 · 询盘 5 个 · 建议加快询盘转化跟进" },
+        { tag:"广告", level:"warn", text:"P4P 未投放 · 同行日均曝光 151 · 建议开通小预算测试" },
+        { tag:"商品", level:"warn", text:"优品仅 3 个 · 同行优 33 个 · 有询盘商品仅 6 个" }
+      ],
+      team: {
+        members: [
+          { name:"yuner hn",     inq:2, reply:"39 min", follow:"100%", conv:"0%", overdue:0, status:"ok",  statusText:"正常" },
+          { name:"Dan Peifang",  inq:0, reply:"9 min",  follow:"100%", conv:"0%", overdue:0, status:"ok",  statusText:"正常" },
+          { name:"Liu Guoling",  inq:0, reply:"—",      follow:"0%",   conv:"0%", overdue:0, status:"warn", statusText:"暂无数据" }
+        ],
+        keywords: [
+          { kw:"LPG 灌装秤 (50g Filling Scale)", spend:"$4,999", click:0, inq:1, status:"ok",  statusText:"有询盘" },
+          { kw:"LPG 发电机 10-35kW",             spend:"$1,199", click:2, inq:1, status:"ok",  statusText:"有询盘" }
+        ],
+        progress: [
+          { name:"今日上新商品", pct:100 },
+          { name:"今日修改商品", pct:100 }
+        ],
+        todos: [
+          { tag:"跟进", level:"bad",  text:"今日 5 条询盘 · 全员已 100% 回复 · 需继续跟进转成交" },
+          { tag:"广告", level:"warn", text:"P4P 未投放 · 建议开通小预算测试 1-2 周看效果" },
+          { tag:"商品", level:"warn", text:"优品 3 个偏少 · 建议优化 6 个有询盘商品的主图与详情" }
+        ]
+      }
+    },
 
-  // ② 近 7 天趋势（真实数据：8/4 - 8/10）
-  trend: {
-    labels:     ["8/4","8/5","8/6","8/7","8/8","8/9","8/10"],
-    views:      [669, 729, 1230, 1393, 1119, 1734, 1874],
-    inquiries:  [3, 1, 1, 4, 3, 5, 5]
-  },
+    // ---------- 本周（2026-08-04 ~ 08-10，7天） ----------
+    week: {
+      label: "本周",
+      sub:   "8/4 – 8/10",
+      kpis: [
+        { name:"新增询盘",  value:"18",       delta:"7天合计 · 日均 2.6 · 同行优 31", dir:"up", status:"ok"   },
+        { name:"回复率",    value:"100%",     delta:"30日均 · 目标 ≥95%",            dir:"up", status:"ok"   },
+        { name:"5分钟回复率",value:"77.8%",   delta:"30日均 · 同行优 79.2%",         dir:"up", status:"ok"   },
+        { name:"本周曝光",  value:"8,748",    delta:"7天合计 · 同行优 30,118",       dir:"up", status:"ok"   },
+        { name:"成交订单",  value:"0",        delta:"⚠ 7天合计 0 单",                 dir:"down", status:"bad" },
+        { name:"起草订单",  value:"1",        delta:"本周 1 笔 · 待推进成单",          dir:"up", status:"warn" }
+      ],
+      trend: {
+        labels: ["8/4","8/5","8/6","8/7","8/8","8/9","8/10"],
+        views:      [669,729,1230,1393,1119,1734,1874],
+        inquiries:  [3,1,1,4,3,5,5]
+      },
+      health_panel: [
+        { label:"P4P 广告",      value:"未投放",  status:"warn", note:"同行周均曝光 1,147" },
+        { label:"全站推曝光",    value:"5,735",   note:"点击 152" },
+        { label:"搜索点击率",    value:"2.24%",   status:"ok", note:"同行优 1.70%" },
+        { label:"平均回复时长",  value:"0.63h",   status:"ok", note:"同行均 4.14h" },
+        { label:"访客询盘率",    value:"8.0%",    status:"ok", note:"同行均 5.5%" }
+      ],
+      redFlags: [
+        { tag:"成交", level:"bad",  text:"本周 0 笔成交 · 18 个询盘 · 转化是最大问题" },
+        { tag:"广告", level:"warn", text:"P4P 未投放 · 同行周均曝光 1,147 · 流量靠自然+全站推" },
+        { tag:"商品", level:"warn", text:"优品仅 3 个 · 有询盘商品 26 个 · 建议分层优化" }
+      ],
+      team: {
+        members: [
+          { name:"yuner hn",     inq:2, reply:"47 min", follow:"100%", conv:"0%", overdue:0, status:"ok",  statusText:"正常" },
+          { name:"Dan Peifang",  inq:0, reply:"14 min", follow:"100%", conv:"0%", overdue:0, status:"ok",  statusText:"正常" },
+          { name:"Liu Guoling",  inq:0, reply:"—",      follow:"0%",   conv:"0%", overdue:0, status:"warn", statusText:"暂无数据" }
+        ],
+        keywords: [
+          { kw:"LPG 灌装秤 (50g Filling Scale)", spend:"$4,999", click:0, inq:1, status:"ok",  statusText:"有询盘" },
+          { kw:"LPG 发电机 10-35kW",             spend:"$1,199", click:2, inq:1, status:"ok",  statusText:"有询盘" }
+        ],
+        progress: [
+          { name:"本周上新商品", pct:100 },
+          { name:"本周修改商品", pct:100 }
+        ],
+        todos: [
+          { tag:"跟进", level:"bad",  text:"本周 18 询盘已 100% 回复 · 重点跟进 5 个高质量买家" },
+          { tag:"广告", level:"warn", text:"P4P 未投放 · 建议开通小预算测试 1-2 周看效果" },
+          { tag:"商品", level:"warn", text:"26 个有询盘商品 · 建议集中优化 TOP10 主图详情" }
+        ]
+      }
+    },
 
-  // ③ 投放健康度（今日）
-  health_panel: [
-    { label:"P4P 广告",      value:"未投放",  status:"warn", note:"同行日均曝光 151" },
-    { label:"全站推曝光",    value:"1,137",   note:"点击 31" },
-    { label:"搜索点击率",    value:"2.11%",   status:"ok", note:"同行优 1.74%" },
-    { label:"平均回复时长",  value:"0.63h",   status:"ok", note:"同行均 4.14h" },
-    { label:"优品数",        value:"3 个",    status:"warn", note:"同行优 33 个" }
-  ],
-
-  // ④ 今日红灯事项（level: bad 红 / warn 橙）
-  redFlags: [
-    { tag:"成交", level:"bad",  text:"近 7 日 0 笔成交 · 今日询盘 5 个 · 建议加快询盘转化跟进" },
-    { tag:"广告", level:"warn", text:"P4P 未投放 · 同行日均曝光 151 · 建议开通小预算测试" },
-    { tag:"商品", level:"warn", text:"优品仅 3 个 · 同行优 33 个 · 有询盘商品仅 6 个 · 需提升产品分层" }
-  ],
-
-  // ⑤ 团队视图（真实数据：2026-08-10）
-  team: {
-    members: [
-      { name:"yuner hn", inq:2, reply:"39 min", follow:"100%", conv:"0%", overdue:0, status:"ok",  statusText:"正常" },
-      { name:"Dan Peifang", inq:0, reply:"9 min", follow:"100%", conv:"0%", overdue:0, status:"ok",  statusText:"正常" },
-      { name:"Liu Guoling", inq:0, reply:"—", follow:"0%", conv:"0%", overdue:0, status:"warn", statusText:"暂无数据" }
-    ],
-    keywords: [
-      { kw:"LPG 灌装秤 (50g Filling Scale)", spend:"$4,999", click:0, inq:1, cost:"—",  status:"ok",  statusText:"有询盘" },
-      { kw:"LPG 发电机 10-35kW",             spend:"$1,199", click:2, inq:1, cost:"—",  status:"ok",  statusText:"有询盘" }
-    ],
-    progress: [
-      { name:"本周上新商品", pct:100 },
-      { name:"本周修改商品", pct:100 }
-    ],
-    todos: [
-      { tag:"跟进", level:"bad",  text:"今日 5 条询盘 · 全员已 100% 回复 · 需继续跟进转成交" },
-      { tag:"广告", level:"warn", text:"P4P 未投放 · 建议开通小预算测试 1-2 周看效果" },
-      { tag:"商品", level:"warn", text:"优品 3 个偏少 · 建议优化 6 个有询盘商品的主图与详情" }
-    ]
+    // ---------- 本月（2026-07-12 ~ 08-10，30天） ----------
+    month: {
+      label: "本月",
+      sub:   "7/12 – 8/10",
+      kpis: [
+        { name:"新增询盘",  value:"34",       delta:"30天合计 · 日均 1.1 · 同行优 93", dir:"up", status:"ok"   },
+        { name:"回复率",    value:"100%",     delta:"30日均 · 目标 ≥95%",              dir:"up", status:"ok"   },
+        { name:"5分钟回复率",value:"77.8%",   delta:"30日均 · 同行优 79.2%",           dir:"up", status:"ok"   },
+        { name:"本月曝光",  value:"21,654",   delta:"30天合计 · 同行优 100,275",       dir:"up", status:"ok"   },
+        { name:"成交订单",  value:"0",        delta:"⚠ 30天合计 0 单",                  dir:"down", status:"bad" },
+        { name:"起草订单",  value:"1",        delta:"本月 1 笔 · 待推进成单",            dir:"up", status:"warn" }
+      ],
+      trend: {
+        labels: ["8/1","8/2","8/3","8/4","8/5","8/6","8/7","8/8","8/9","8/10"],
+        views:      [1030,1289,629,669,729,1230,1393,1119,1734,1874],
+        inquiries:  [1,3,2,3,1,1,4,3,5,5]
+      },
+      health_panel: [
+        { label:"P4P 广告",      value:"未投放",  status:"warn", note:"同行月均曝光 1,147" },
+        { label:"全站推曝光",    value:"11,204",  note:"点击 275" },
+        { label:"搜索点击率",    value:"1.81%",   status:"ok", note:"同行优 1.77%" },
+        { label:"平均回复时长",  value:"0.63h",   status:"ok", note:"同行均 4.14h" },
+        { label:"访客询盘率",    value:"5.6%",    status:"ok", note:"同行均 4.0%" }
+      ],
+      redFlags: [
+        { tag:"成交", level:"bad",  text:"30 天 0 笔成交 · 34 个询盘 · 转化链路需重点排查" },
+        { tag:"广告", level:"warn", text:"P4P 未投放 · 全站推曝光 11,204 · 建议补 P4P 流量" },
+        { tag:"商品", level:"warn", text:"优品 3 个 · 有询盘商品 58 个 · 同行优 33 个优品" }
+      ],
+      team: {
+        members: [
+          { name:"yuner hn",     inq:5, reply:"111 min", follow:"100%", conv:"0%", overdue:0, status:"ok",  statusText:"正常" },
+          { name:"Dan Peifang",  inq:0, reply:"23 min",  follow:"100%", conv:"0%", overdue:0, status:"ok",  statusText:"正常" },
+          { name:"Liu Guoling",  inq:0, reply:"—",       follow:"0%",   conv:"0%", overdue:0, status:"warn", statusText:"暂无数据" }
+        ],
+        keywords: [
+          { kw:"LPG 灌装秤 (50g Filling Scale)", spend:"$4,999", click:0, inq:1, status:"ok",  statusText:"有询盘" },
+          { kw:"LPG 发电机 10-35kW",             spend:"$1,199", click:2, inq:1, status:"ok",  statusText:"有询盘" }
+        ],
+        progress: [
+          { name:"本月上新商品", pct:100 },
+          { name:"本月修改商品", pct:100 }
+        ],
+        todos: [
+          { tag:"跟进", level:"bad",  text:"30 天 34 条询盘全部已回复 · 集中攻坚 5 个高意向买家" },
+          { tag:"广告", level:"warn", text:"P4P 未投放 · 建议开通小预算测试 1-2 周看效果" },
+          { tag:"商品", level:"warn", text:"58 个有询盘商品 · 建议月度集中优化与上新" }
+        ]
+      }
+    }
   }
 };
 </script>
@@ -146,6 +253,12 @@ var DATA = {
     </div>
   </header>
 
+  <div class="tabbar" id="dimTabs">
+    <button class="tab on" data-dim="day">今日</button>
+    <button class="tab" data-dim="week">本周</button>
+    <button class="tab" data-dim="month">本月</button>
+  </div>
+
   <div class="tabs" id="tabs">
     <button class="tab on" data-v="boss">老板视图 · 总览</button>
     <button class="tab" data-v="team" id="tabTeam">团队视图 · 分工</button>
@@ -155,38 +268,38 @@ var DATA = {
     <div class="kpis" id="kpis"></div>
     <div class="grid2">
       <div class="panel">
-        <h3>近 7 天 · 曝光 / 询盘趋势 <span class="hint">柱：曝光（左轴） · 线：询盘（右轴）</span></h3>
+        <h3 id="trendTitle">曝光 / 询盘趋势 <span class="hint">柱：曝光（左轴） · 线：询盘（右轴）</span></h3>
         <div class="ch"><canvas id="trend"></canvas></div>
       </div>
       <div class="panel">
-        <h3>投放健康度 <span class="hint">今日</span></h3>
+        <h3>投放健康度 <span class="hint" id="dimHint"></span></h3>
         <div id="healthPanel"></div>
       </div>
     </div>
     <div class="panel">
-      <h3>今日必须处理 · 红灯事项 <span class="hint" id="flagCount"></span></h3>
+      <h3>必须处理 · 红灯事项 <span class="hint" id="flagCount"></span></h3>
       <div id="redFlags"></div>
     </div>
   </section>
 
   <section class="view" id="team">
     <div class="panel" style="margin-bottom:14px">
-      <h3>业务员询盘处理 <span class="hint">今日</span></h3>
+      <h3>业务员询盘处理 <span class="hint" id="memberHint"></span></h3>
       <div style="overflow-x:auto"><table>
-        <thead><tr><th>业务员</th><th class="num">今日询盘</th><th class="num">平均回复</th><th class="num">跟进率</th><th class="num">转化率</th><th class="num">超时未回</th><th>状态</th></tr></thead>
+        <thead><tr><th>业务员</th><th class="num">询盘</th><th class="num">平均回复</th><th class="num">跟进率</th><th class="num">转化率</th><th class="num">超时未回</th><th>状态</th></tr></thead>
         <tbody id="members"></tbody>
       </table></div>
     </div>
     <div class="grid2">
       <div class="panel">
-        <h3>重点商品表现 <span class="hint">今日 · 有询盘商品</span></h3>
+        <h3>重点商品表现 <span class="hint">有询盘商品</span></h3>
         <div style="overflow-x:auto"><table>
           <thead><tr><th>商品</th><th class="num">价格</th><th class="num">点击</th><th class="num">询盘</th><th>状态</th></tr></thead>
           <tbody id="keywords"></tbody>
         </table></div>
       </div>
       <div class="panel">
-        <h3>内容与上新进度 <span class="hint">本周</span></h3>
+        <h3>内容与上新进度 <span class="hint" id="progressHint"></span></h3>
         <div id="progress"></div>
       </div>
     </div>
@@ -205,58 +318,76 @@ var DATA = {
   var lv = { ok:['var(--ok-soft)','var(--ok-line)','var(--ok)'],
              warn:['var(--warn-soft)','var(--warn-line)','var(--warn)'],
              bad:['var(--bad-soft)','var(--bad-line)','var(--bad)'] };
+  var chart = null;
+  var currentDim = 'day';
 
   // Header
   $('logo').textContent = (D.shop || '板').charAt(0);
   $('title').textContent = (D.shop || '') + ' · 经营看板';
-  $('subtitle').textContent = D.date || '';
+  $('subtitle').textContent = D.dateNote || '';
   $('updated').textContent = '数据截至昨日 24:00 · ' + (D.updatedAt || '');
-  if (D.health) { var h = $('health'); h.textContent = D.health.text; h.className = 'badge ' + (D.health.level || ''); }
+  $('health').textContent = '需关注 · 成交 0 单'; $('health').className = 'badge warn';
+  $('footer').textContent = '数据来源：阿里国际站数据参谋自动抓取 · 如需调整指标或红灯阈值，直接告诉你的 Accio 助手';
 
-  // KPI
-  $('kpis').innerHTML = (D.kpis || []).map(function(k){
-    return '<div class="kpi"><div class="n">' + k.name + ' <span class="dot ' + (k.status||'ok') + '"></span></div>' +
-           '<div class="v">' + k.value + '</div>' +
-           '<div class="d ' + (k.dir||'') + '">' + (k.delta||'') + '</div></div>';
-  }).join('');
-
-  // 投放健康度
-  $('healthPanel').innerHTML = (D.health_panel || []).map(function(r){
-    var right = r.status ? '<span class="mini ' + r.status + '">' + r.value + '</span>'
-                         : r.value + (r.note ? ' <span style="color:var(--ink2);font-weight:400">· ' + r.note + '</span>' : '');
-    return '<div class="krow"><span class="l">' + r.label + '</span><span class="r">' + right + '</span></div>';
-  }).join('');
-
-  // 红灯事项
-  function flagRow(f){
-    var c = lv[f.level] || lv.warn;
-    return '<div class="todo-row"><span class="tag" style="background:' + c[0] + ';border-color:' + c[1] + ';color:' + c[2] + '">' +
-           f.tag + '</span><span class="txt">' + f.text + '</span></div>';
-  }
-  $('redFlags').innerHTML = (D.redFlags || []).map(flagRow).join('');
-  $('flagCount').textContent = (D.redFlags || []).length + ' 项 · 处理完自动熄灭';
-
-  // 趋势图
-  if (D.trend && window.Chart) {
-    new Chart($('trend').getContext('2d'), {
-      data: { labels: D.trend.labels,
-        datasets: [
-          { type:'bar', label:'曝光', data:D.trend.views, backgroundColor:'rgba(62,112,150,.55)', borderColor:'#3e7096', borderWidth:1, yAxisID:'y', order:2 },
-          { type:'line', label:'询盘', data:D.trend.inquiries, borderColor:'#c56443', backgroundColor:'#c56443', borderWidth:2, pointRadius:2, tension:.3, yAxisID:'y1', order:1 }
-      ]},
-      options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
-        plugins:{ legend:{position:'bottom', labels:{boxWidth:14,font:{size:12}}} },
-        scales:{ x:{grid:{display:false},ticks:{font:{size:11},maxTicksLimit:10}},
-                 y:{position:'left',grid:{color:'rgba(0,0,0,.05)'},ticks:{font:{size:11}}},
-                 y1:{position:'right',grid:{display:false},ticks:{font:{size:11}}} } }
+  // 维度切换
+  function setDim(dim){
+    currentDim = dim;
+    var dd = D.dims[dim];
+    document.querySelectorAll('#dimTabs .tab').forEach(function(t){
+      t.classList.toggle('on', t.getAttribute('data-dim') === dim);
     });
+    $('subtitle').textContent = dd.label + ' · ' + dd.sub + ' · ' + D.dateNote;
+    $('dimHint').textContent = dd.sub;
+    $('memberHint').textContent = dd.sub;
+    $('progressHint').textContent = dd.sub;
+    renderBoss(dd);
+    renderTeam(dd.team);
+  }
+
+  // 老板视图
+  function renderBoss(dd){
+    $('kpis').innerHTML = dd.kpis.map(function(k){
+      return '<div class="kpi"><div class="n">' + k.name + ' <span class="dot ' + (k.status||'ok') + '"></span></div>' +
+             '<div class="v">' + k.value + '</div>' +
+             '<div class="d ' + (k.dir||'') + '">' + (k.delta||'') + '</div></div>';
+    }).join('');
+
+    $('healthPanel').innerHTML = dd.health_panel.map(function(r){
+      var right = r.status ? '<span class="mini ' + r.status + '">' + r.value + '</span>'
+                           : r.value + (r.note ? ' <span style="color:var(--ink2);font-weight:400">· ' + r.note + '</span>' : '');
+      return '<div class="krow"><span class="l">' + r.label + '</span><span class="r">' + right + '</span></div>';
+    }).join('');
+
+    function flagRow(f){
+      var c = lv[f.level] || lv.warn;
+      return '<div class="todo-row"><span class="tag" style="background:' + c[0] + ';border-color:' + c[1] + ';color:' + c[2] + '">' +
+             f.tag + '</span><span class="txt">' + f.text + '</span></div>';
+    }
+    $('redFlags').innerHTML = dd.redFlags.map(flagRow).join('');
+    $('flagCount').textContent = dd.redFlags.length + ' 项 · 处理完自动熄灭';
+
+    if (dd.trend && window.Chart) {
+      if (chart) chart.destroy();
+      chart = new Chart($('trend').getContext('2d'), {
+        data: { labels: dd.trend.labels,
+          datasets: [
+            { type:'bar', label:'曝光', data:dd.trend.views, backgroundColor:'rgba(62,112,150,.55)', borderColor:'#3e7096', borderWidth:1, yAxisID:'y', order:2 },
+            { type:'line', label:'询盘', data:dd.trend.inquiries, borderColor:'#c56443', backgroundColor:'#c56443', borderWidth:2, pointRadius:2, tension:.3, yAxisID:'y1', order:1 }
+        ]},
+        options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
+          plugins:{ legend:{position:'bottom', labels:{boxWidth:14,font:{size:12}}} },
+          scales:{ x:{grid:{display:false},ticks:{font:{size:11},maxTicksLimit:10}},
+                   y:{position:'left',grid:{color:'rgba(0,0,0,.05)'},ticks:{font:{size:11}}},
+                   y1:{position:'right',grid:{display:false},ticks:{font:{size:11}}} } }
+      });
+    }
   }
 
   // 团队视图
-  if (!D.team) {
-    $('tabTeam').style.display = 'none';
-  } else {
-    $('members').innerHTML = (D.team.members || []).map(function(m){
+  function renderTeam(t){
+    if (!t) { $('tabTeam').style.display = 'none'; return; }
+    $('tabTeam').style.display = '';
+    $('members').innerHTML = t.members.map(function(m){
       return '<tr><td>' + m.name + '</td><td class="num">' + m.inq + '</td>' +
         '<td class="num ' + (m.status==='bad'?'cell-bad':'') + '">' + m.reply + '</td>' +
         '<td class="num ' + (m.status==='bad'?'cell-bad':'cell-ok') + '">' + m.follow + '</td>' +
@@ -265,27 +396,34 @@ var DATA = {
         '<td><span class="mini ' + m.status + '">' + m.statusText + '</span></td></tr>';
     }).join('');
 
-    $('keywords').innerHTML = (D.team.keywords || []).map(function(k){
+    $('keywords').innerHTML = t.keywords.map(function(k){
       return '<tr><td>' + k.kw + '</td><td class="num">' + k.spend + '</td><td class="num">' + k.click + '</td>' +
         '<td class="num">' + k.inq + '</td>' +
         '<td><span class="mini ' + k.status + '">' + k.statusText + '</span></td></tr>';
     }).join('');
 
-    $('progress').innerHTML = (D.team.progress || []).map(function(p){
+    $('progress').innerHTML = t.progress.map(function(p){
       return '<div class="prog-row"><span class="name">' + p.name + '</span>' +
         '<div class="bar-track"><div class="bar-fill" style="width:' + p.pct + '%"></div></div>' +
         '<span class="pct">' + p.pct + '%</span></div>';
     }).join('');
 
-    $('todos').innerHTML = (D.team.todos || []).map(flagRow).join('');
+    var c0 = lv.bad, c1 = lv.warn;
+    $('todos').innerHTML = t.todos.map(function(f){
+      var c = lv[f.level] || lv.warn;
+      return '<div class="todo-row"><span class="tag" style="background:' + c[0] + ';border-color:' + c[1] + ';color:' + c[2] + '">' +
+             f.tag + '</span><span class="txt">' + f.text + '</span></div>';
+    }).join('');
   }
 
-  $('footer').textContent = '数据来源：平台后台自动抓取 · 如需调整指标或红灯阈值，直接告诉你的 Accio 助手';
-
-  // Tab 切换
-  document.querySelectorAll('.tab').forEach(function(t){
+  // 初始渲染 + 事件绑定
+  setDim('day');
+  document.querySelectorAll('#dimTabs .tab').forEach(function(t){
+    t.addEventListener('click', function(){ setDim(t.getAttribute('data-dim')); });
+  });
+  document.querySelectorAll('#tabs .tab').forEach(function(t){
     t.addEventListener('click', function(){
-      document.querySelectorAll('.tab').forEach(function(x){ x.classList.remove('on'); });
+      document.querySelectorAll('#tabs .tab').forEach(function(x){ x.classList.remove('on'); });
       t.classList.add('on');
       document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('on'); });
       $(t.getAttribute('data-v')).classList.add('on');
