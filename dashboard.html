@@ -335,7 +335,7 @@ var DATA = {
   <div class="topbar">
     <div class="brand">
       <div class="logo" id="logo">豫</div>
-      <div><h1 id="title">豫能实业 · 经营看板 <span id="brandEn" style="font-size:12px;font-weight:400;opacity:.8"></span></h1><p id="subtitle"></p></div>
+      <div><h1 id="title">豫能实业 · 经营看板 <span id="brandEn" style="font-size:12px;font-weight:400;opacity:.8">| YUNER INDUSTRIAL</span></h1><p id="subtitle"></p></div>
     </div>
     <div class="hright">
       <span class="badge" id="updated"></span>
@@ -428,7 +428,8 @@ var DATA = {
   // Header
   $('logo').textContent = (D.shop || '板').charAt(0);
   $('title').textContent = (D.shop || '') + ' · 经营看板';
-  $('brandEn').textContent = D.shopEn ? '| ' + D.shopEn : '';
+  var be = $('brandEn');
+  if (be) be.textContent = D.shopEn ? '| ' + D.shopEn : '';
   $('subtitle').textContent = D.dateNote || '';
   $('updated').textContent = '数据截至昨日 24:00 · ' + (D.updatedAt || '');
   if (D.health) { var h = $('health'); h.textContent = D.health.text; h.className = 'badge ' + (D.health.level || ''); }
