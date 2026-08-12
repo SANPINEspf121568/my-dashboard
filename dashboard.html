@@ -164,11 +164,23 @@ var DATA = {
         { tag:"商品", level:"warn", text:"优品仅 3 个 · 同行优 33 个 · 有询盘商品仅 6 个" }
       ],
       donut: { labels:["自然搜索","全站推","P4P"], data:[1044,1137,0], colors:["#2f6fc4","#8b9dc3","#d8dee9"] },
-      team: [
-        { name:"yuner hn",    role:"主力",  inq:2,  ctr:"2.1%",  conv:"0%",  reply:"39 min",  status:"ok",  statusText:"正常" },
-        { name:"Dan Peifang", role:"客服",  inq:0,  ctr:"—",     conv:"0%",  reply:"9 min",   status:"ok",  statusText:"正常" },
-        { name:"Liu Guoling", role:"—",     inq:0,  ctr:"—",     conv:"0%",  reply:"—",       status:"warn", statusText:"暂无数据" }
-      ],
+      team: {
+        focus: {
+          name:"yuner hn", role:"主力", status:"ok", statusText:"正常",
+          stats: { inq:2, ctr:"2.1%", conv:"0%", reply:"39 min" },
+          actions: [
+            { icon:"💬", text:"询盘处理：2 条 · 100% 回复 · 平均 39 分钟" },
+            { icon:"⚡", text:"5分钟回复率：81.4%（优于同行 79.2%）" },
+            { icon:"💬", text:"TM 咨询接待：4 条" },
+            { icon:"📦", text:"上新商品：31 个" },
+            { icon:"✏️", text:"修改商品：32 个" },
+            { icon:"📄", text:"已读 RFQ：0 条" },
+            { icon:"📋", text:"起草订单：0 笔" },
+            { icon:"👁️", text:"曝光 1,044 · 点击 22" }
+          ]
+        },
+        liu: { name:"Liu Guoling", log:["今日暂无工作记录（曝光 0 · 询盘 0 · 上新 0）"] }
+      },
       products: [
         { name:"LPG 撬装加注站",   price:"$10,890",  view:38,  click:0,  inq:1,  status:"ok",  statusText:"有询盘" },
         { name:"LPG 灌装线(链式)", price:"$180,000", view:15,  click:4,  inq:0,  status:"ok",  statusText:"橱窗" },
@@ -218,11 +230,23 @@ var DATA = {
         { tag:"商品", level:"warn", text:"优品仅 3 个 · 有询盘商品 26 个 · 建议分层优化" }
       ],
       donut: { labels:["自然搜索","全站推","P4P"], data:[4859,5735,0], colors:["#2f6fc4","#8b9dc3","#d8dee9"] },
-      team: [
-        { name:"yuner hn",    role:"主力",  inq:2,  ctr:"2.2%",  conv:"0%",  reply:"47 min",  status:"ok",  statusText:"正常" },
-        { name:"Dan Peifang", role:"客服",  inq:0,  ctr:"—",     conv:"0%",  reply:"14 min",  status:"ok",  statusText:"正常" },
-        { name:"Liu Guoling", role:"—",     inq:0,  ctr:"—",     conv:"0%",  reply:"—",       status:"warn", statusText:"暂无数据" }
-      ],
+      team: {
+        focus: {
+          name:"yuner hn", role:"主力", status:"ok", statusText:"正常",
+          stats: { inq:2, ctr:"2.2%", conv:"0%", reply:"47 min" },
+          actions: [
+            { icon:"💬", text:"询盘处理：2 条 · 100% 回复 · 平均 47 分钟" },
+            { icon:"⚡", text:"5分钟回复率：82.9%（优于同行 79.2%）" },
+            { icon:"💬", text:"TM 咨询接待：13 条" },
+            { icon:"📦", text:"上新商品：180 个" },
+            { icon:"✏️", text:"修改商品：197 个" },
+            { icon:"📄", text:"已读 RFQ：3 条" },
+            { icon:"📋", text:"起草订单：1 笔" },
+            { icon:"👁️", text:"曝光 3,904 · 点击 87" }
+          ]
+        },
+        liu: { name:"Liu Guoling", log:["本周暂无工作记录（曝光 0 · 询盘 0 · 上新 0）"] }
+      },
       products: [
         { name:"LPG 加液机",          price:"$3,110",   view:255, click:0, inq:"—", status:"ok", statusText:"潜力优品" },
         { name:"5T 撬装加注站",       price:"$13,365",  view:223, click:2, inq:"—", status:"ok", statusText:"潜力优品" },
@@ -272,11 +296,23 @@ var DATA = {
         { tag:"商品", level:"warn", text:"优品 3 个 · 有询盘商品 58 个 · 同行优 33 个优品" }
       ],
       donut: { labels:["自然搜索","全站推","P4P"], data:[12432,11204,0], colors:["#2f6fc4","#8b9dc3","#d8dee9"] },
-      team: [
-        { name:"yuner hn",    role:"主力",  inq:5,  ctr:"1.8%",  conv:"0%",  reply:"111 min", status:"ok",  statusText:"正常" },
-        { name:"Dan Peifang", role:"客服",  inq:0,  ctr:"—",     conv:"0%",  reply:"23 min",  status:"ok",  statusText:"正常" },
-        { name:"Liu Guoling", role:"—",     inq:0,  ctr:"—",     conv:"0%",  reply:"—",       status:"warn", statusText:"暂无数据" }
-      ],
+      team: {
+        focus: {
+          name:"yuner hn", role:"主力", status:"ok", statusText:"正常",
+          stats: { inq:5, ctr:"1.8%", conv:"0%", reply:"111 min" },
+          actions: [
+            { icon:"💬", text:"询盘处理：5 条 · 100% 回复 · 平均 111 分钟" },
+            { icon:"⚡", text:"5分钟回复率：75.0%" },
+            { icon:"💬", text:"TM 咨询接待：21 条" },
+            { icon:"📦", text:"上新商品：441 个" },
+            { icon:"✏️", text:"修改商品：1,019 个" },
+            { icon:"📄", text:"已读 RFQ：15 条" },
+            { icon:"📋", text:"起草订单：0 笔" },
+            { icon:"👁️", text:"曝光 7,257 · 点击 114" }
+          ]
+        },
+        liu: { name:"Liu Guoling", log:["本月暂无工作记录（曝光 0 · 询盘 0 · 上新 0）"] }
+      },
       products: [
         { name:"LPG 加液机",          price:"$3,110",   view:370, click:1, inq:"—", status:"ok", statusText:"潜力优品" },
         { name:"LPG 输送泵 5.5KW",    price:"$4,040",   view:292, click:1, inq:"—", status:"ok", statusText:"潜力优品" },
@@ -344,11 +380,10 @@ var DATA = {
     <!-- ============ 右窗口：商品与运营 ============ -->
     <div>
       <div class="panel mb">
-        <h3>成员效果对比 <span class="hint" id="teamHint"></span></h3>
-        <div style="overflow-x:auto"><table>
-          <thead><tr><th>成员</th><th>角色</th><th class="num">询盘</th><th class="num">点击率</th><th class="num">转化</th><th class="num">平均回复</th><th>状态</th></tr></thead>
-          <tbody id="teamBody"></tbody>
-        </table></div>
+        <h3>重点成员 · yuner hn 动作汇报 <span class="hint" id="teamHint"></span></h3>
+        <div id="focusCard"></div>
+        <h3 style="margin-top:14px">Liu Guoling · 工作日志 <span class="hint">每日做了什么</span></h3>
+        <div id="liuCard"></div>
       </div>
 
       <div class="panel mb">
@@ -436,15 +471,35 @@ var DATA = {
     }).join('');
   }
 
-  // 成员表
-  function renderTeam(rows){
-    $('teamBody').innerHTML = rows.map(function(m){
-      return '<tr><td>' + m.name + '</td><td>' + m.role + '</td><td class="num">' + m.inq + '</td>' +
-        '<td class="num">' + m.ctr + '</td>' +
-        '<td class="num ' + (m.conv==='0%' ? 'cell-bad' : 'cell-ok') + '">' + m.conv + '</td>' +
-        '<td class="num">' + m.reply + '</td>' +
-        '<td><span class="mini ' + m.status + '">' + m.statusText + '</span></td></tr>';
+  // 重点成员 + 工作日志
+  function renderTeam(team){
+    if (!team) { $('tabTeam') && ($('tabTeam').style.display = 'none'); return; }
+    var f = team.focus, st = f.status || 'ok';
+    var stC = lv[st] || lv.ok;
+    var card = '<div style="border:1px solid ' + stC[1] + ';background:' + stC[0] + ';border-radius:12px;padding:12px 14px">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">' +
+        '<div style="font-weight:700;font-size:15px">' + f.name + ' <span style="font-weight:400;color:var(--ink2);font-size:12px">· ' + (f.role||'') + '</span></div>' +
+        '<span class="mini ' + st + '">' + (f.statusText||'') + '</span>' +
+      '</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:10px">' +
+        '<div class="kpi" style="border-left-color:var(--navy2)"><div class="n">询盘</div><div class="v" style="font-size:20px">' + f.stats.inq + '</div></div>' +
+        '<div class="kpi" style="border-left-color:var(--navy2)"><div class="n">点击率</div><div class="v" style="font-size:20px">' + f.stats.ctr + '</div></div>' +
+        '<div class="kpi ' + (f.stats.conv==='0%'?'bad':'') + '"><div class="n">转化</div><div class="v" style="font-size:20px">' + f.stats.conv + '</div></div>' +
+        '<div class="kpi" style="border-left-color:var(--navy2)"><div class="n">平均回复</div><div class="v" style="font-size:20px">' + f.stats.reply + '</div></div>' +
+      '</div>' +
+      '<div style="font-size:12.5px">' + (f.actions||[]).map(function(a){
+        return '<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-top:1px solid rgba(0,0,0,.06)"><span>' + a.icon + '</span><span>' + a.text + '</span></div>';
+      }).join('') + '</div>' +
+    '</div>';
+    $('focusCard').innerHTML = card;
+
+    var liu = team.liu;
+    var liuHtml = (liu.log||[]).map(function(t, i){
+      var c = /暂无/.test(t) ? lv.warn : lv.ok;
+      return '<div class="todo-row"><span class="t-ico ' + (/暂无/.test(t)?'warn':'ok') + '">' + (/暂无/.test(t)?'🕐':'✅') + '</span>' +
+        '<div class="txt"><span class="tag" style="color:' + c[2] + '">' + liu.name + '</span> · ' + t + '</div></div>';
     }).join('');
+    $('liuCard').innerHTML = liuHtml || '<div class="todo-row"><span class="txt">今日暂无记录</span></div>';
   }
 
   // 商品表
