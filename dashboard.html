@@ -16,7 +16,8 @@
   /* ===== 顶栏 ===== */
   .topbar{background:linear-gradient(90deg,#174a8f,#2f6fc4 70%,#3d7fd4);color:#fff;border-radius:14px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:0 4px 14px rgba(30,90,168,.25)}
   .brand{display:flex;align-items:center;gap:12px}
-  .logo{width:40px;height:40px;border-radius:11px;background:#fff;color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  .logo{width:42px;height:42px;border-radius:11px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  .logo img{width:100%;height:100%;object-fit:contain;display:block}
   .brand h1{font-size:20px;font-weight:700}
   .brand p{font-size:12px;opacity:.85}
   .hright{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -334,7 +335,7 @@ var DATA = {
   <!-- 顶栏 -->
   <div class="topbar">
     <div class="brand">
-      <div class="logo" id="logo">豫</div>
+      <div class="logo" id="logo"><img src="logo.png" alt="豫能实业" id="logoImg"></div>
       <div><h1 id="title">豫能实业 · 经营看板 <span id="brandEn" style="font-size:12px;font-weight:400;opacity:.8">| YUNER INDUSTRIAL</span></h1><p id="subtitle"></p></div>
     </div>
     <div class="hright">
@@ -426,7 +427,9 @@ var DATA = {
   var chartTrend = null, chartDonut = null;
 
   // Header
-  $('logo').textContent = (D.shop || '板').charAt(0);
+  var li = $('logoImg');
+  if (li) { li.onerror = function(){ this.style.display='none'; $('logo').textContent = (D.shop || '板').charAt(0); }; }
+  else { $('logo').textContent = (D.shop || '板').charAt(0); }
   $('title').textContent = (D.shop || '') + ' · 经营看板';
   var be = $('brandEn');
   if (be) be.textContent = D.shopEn ? '| ' + D.shopEn : '';
