@@ -113,7 +113,8 @@
      ============================================================ -->
 <script>
 var DATA = {
-  shop:      "我的国际站店铺",
+  shop:      "豫能实业",                // 店铺 / 公司名
+  shopEn:    "YUNER INDUSTRIAL",        // 英文品牌名（可选）
   updatedAt: "8/13 自动拉取",
   dateNote:  "数据参谋 T-2 离线 · 最新完整日 8/10 · 订单实时",
   health:    { text: "需关注 · 成交 0 单", level: "warn" },
@@ -333,8 +334,8 @@ var DATA = {
   <!-- 顶栏 -->
   <div class="topbar">
     <div class="brand">
-      <div class="logo" id="logo">板</div>
-      <div><h1 id="title">店铺经营看板</h1><p id="subtitle"></p></div>
+      <div class="logo" id="logo">豫</div>
+      <div><h1 id="title">豫能实业 · 经营看板</h1><p id="subtitle"></p></div>
     </div>
     <div class="hright">
       <span class="badge" id="updated"></span>
@@ -426,8 +427,8 @@ var DATA = {
 
   // Header
   $('logo').textContent = (D.shop || '板').charAt(0);
-  $('title').textContent = (D.shop || '') + ' · 店铺经营看板';
-  $('subtitle').textContent = D.dateNote || '';
+  $('title').textContent = (D.shop || '') + ' · 经营看板';
+  $('subtitle').textContent = (D.shopEn ? D.shopEn + ' · ' : '') + (D.dateNote || '');
   $('updated').textContent = '数据截至昨日 24:00 · ' + (D.updatedAt || '');
   if (D.health) { var h = $('health'); h.textContent = D.health.text; h.className = 'badge ' + (D.health.level || ''); }
   $('footer').textContent = '数据来源：阿里国际站数据参谋自动抓取 · 运营日历为行业通用节点，可按实际调整 · 需调指标或阈值直接告诉 Accio 助手';
