@@ -6,15 +6,15 @@
 <title>店铺经营看板</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-  :root{--navy:#d97706;--navy2:#f19c23;--navy-soft:#fdf3e0;--bg:#f7f4ee;--card:#fff;--ink:#352c2b;--ink2:#7a6f68;
-    --line:#efe7da;--ok:#1e7d46;--ok-soft:#e7f4ea;--ok-line:#9cc7a8;--warn:#b45309;--warn-soft:#fdf3e3;--warn-line:#e8c98a;
-    --bad:#c0392b;--bad-soft:#fdecea;--bad-line:#e8b4ae;--viz1:#f19c23;--viz2:#e94826;--viz3:#d9a05b}
+  :root{--navy:#b8860b;--navy2:#f0a020;--navy-soft:#fdf6e3;--bg:#faf6ee;--card:#fff;--ink:#352c2b;--ink2:#7a6f68;
+    --line:#f0e6d2;--ok:#1e7d46;--ok-soft:#e7f4ea;--ok-line:#9cc7a8;--warn:#b45309;--warn-soft:#fdf3e3;--warn-line:#e8c98a;
+    --bad:#d44246;--bad-soft:#fdecec;--bad-line:#eab6b8;--viz1:#f0a020;--viz2:#d44246;--viz3:#fbd670}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;background:var(--bg);color:var(--ink);font-size:13px;line-height:1.5}
   .wrap{max-width:1440px;margin:0 auto;padding:16px 18px 36px}
 
   /* ===== 顶栏 ===== */
-  .topbar{background:linear-gradient(90deg,#c2410c,#f19c23 70%,#fbbf24);color:#fff;border-radius:14px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:0 4px 14px rgba(241,156,35,.3)}
+  .topbar{background:linear-gradient(90deg,#b8860b,#f0a020 55%,#fbd670);color:#fff;border-radius:14px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;box-shadow:0 4px 14px rgba(240,160,32,.3)}
   .brand{display:flex;align-items:center;gap:12px}
   .logo{width:42px;height:42px;border-radius:11px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.15)}
   .logo img{width:100%;height:100%;object-fit:contain;display:block}
@@ -64,7 +64,7 @@
   .rank-no{width:20px;height:20px;border-radius:6px;background:var(--navy-soft);color:var(--navy);font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
   .rank-row .rn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .rank-bar{width:96px;height:8px;background:var(--bg);border-radius:99px;overflow:hidden;flex-shrink:0}
-  .rank-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--navy2),#fbbf24)}
+  .rank-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--navy2),#fbd670)}
   .rank-val{width:52px;text-align:right;font-weight:600;flex-shrink:0}
 
   /* ===== 必做清单 ===== */
@@ -86,7 +86,7 @@
   .prog-row{display:flex;align-items:center;gap:10px;font-size:12.5px;margin-bottom:9px}
   .prog-row .name{width:118px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .bar-track{flex:1;height:8px;background:var(--bg);border-radius:99px;overflow:hidden}
-  .bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--navy2),#fbbf24)}
+  .bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--navy2),#fbd670)}
   .pct{font-size:11px;color:var(--ink2);width:34px;text-align:right}
 
   /* ===== 运营日历 ===== */
@@ -165,7 +165,7 @@ var DATA = {
         { tag:"广告", level:"warn", text:"P4P 未投放 · 同行日均曝光 151 · 建议开通小预算测试" },
         { tag:"商品", level:"warn", text:"优品仅 3 个 · 同行优 33 个 · 有询盘商品仅 6 个" }
       ],
-      donut: { labels:["自然搜索","全站推","P4P"], data:[1044,1137,0], colors:["#f19c23","#fbbf24","#fdeed0"] },
+      donut: { labels:["自然搜索","全站推","P4P"], data:[1044,1137,0], colors:["#f0a020","#fbd670","#fdf3e0"] },
       team: {
         focus: {
           name:"yuner hn", role:"主力", status:"ok", statusText:"正常",
@@ -231,7 +231,7 @@ var DATA = {
         { tag:"广告", level:"warn", text:"P4P 未投放 · 同行周均曝光 1,147 · 流量靠自然+全站推" },
         { tag:"商品", level:"warn", text:"优品仅 3 个 · 有询盘商品 26 个 · 建议分层优化" }
       ],
-      donut: { labels:["自然搜索","全站推","P4P"], data:[4859,5735,0], colors:["#f19c23","#fbbf24","#fdeed0"] },
+      donut: { labels:["自然搜索","全站推","P4P"], data:[4859,5735,0], colors:["#f0a020","#fbd670","#fdf3e0"] },
       team: {
         focus: {
           name:"yuner hn", role:"主力", status:"ok", statusText:"正常",
@@ -297,7 +297,7 @@ var DATA = {
         { tag:"广告", level:"warn", text:"P4P 未投放 · 全站推曝光 11,204 · 建议补 P4P 流量" },
         { tag:"商品", level:"warn", text:"优品 3 个 · 有询盘商品 58 个 · 同行优 33 个优品" }
       ],
-      donut: { labels:["自然搜索","全站推","P4P"], data:[12432,11204,0], colors:["#f19c23","#fbbf24","#fdeed0"] },
+      donut: { labels:["自然搜索","全站推","P4P"], data:[12432,11204,0], colors:["#f0a020","#fbd670","#fdf3e0"] },
       team: {
         focus: {
           name:"yuner hn", role:"主力", status:"ok", statusText:"正常",
@@ -563,8 +563,8 @@ var DATA = {
       chartTrend = new Chart($('trend').getContext('2d'), {
         data: { labels: dd.trend.labels,
           datasets: [
-            { type:'bar', label:'曝光', data:dd.trend.views, backgroundColor:'rgba(241,156,35,.55)', borderColor:'#f19c23', borderWidth:1, yAxisID:'y', order:2 },
-            { type:'line', label:'搜索点击', data:dd.trend.clicks, borderColor:'#e94826', backgroundColor:'#e94826', borderWidth:2, pointRadius:2, tension:.3, yAxisID:'y1', order:1 }
+            { type:'bar', label:'曝光', data:dd.trend.views, backgroundColor:'rgba(240,160,32,.55)', borderColor:'#f0a020', borderWidth:1, yAxisID:'y', order:2 },
+            { type:'line', label:'搜索点击', data:dd.trend.clicks, borderColor:'#d44246', backgroundColor:'#d44246', borderWidth:2, pointRadius:2, tension:.3, yAxisID:'y1', order:1 }
         ]},
         options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
           plugins:{ legend:{position:'bottom', labels:{boxWidth:14,font:{size:12}}} },
