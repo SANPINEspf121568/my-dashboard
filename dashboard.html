@@ -114,216 +114,900 @@
      ============================================================ -->
 <script>
 var DATA = {
-  shop:      "豫能实业",                // 店铺 / 公司名
-  shopEn:    "YUNER INDUSTRIAL",        // 英文品牌名（可选）
-  updatedAt: "8/13 自动拉取",
-  dateNote:  "数据参谋 T-2 离线 · 最新完整日 8/10 · 订单实时",
-  health:    { text: "需关注 · 成交 0 单", level: "warn" },
-
-  // 运营节点日历（行业通用节点，可按实际调整）
-  calendar: [
-    { m:"9月", d:"1",  cls:"navy", title:"秋季备货启动",       note:"Q4 旺季备货 · 检查库存与交期" },
-    { m:"10月", d:"15", cls:"navy", title:"秋季广交会",        note:"行业通用节点 · 可安排参展/直播" },
-    { m:"11月", d:"27", cls:"warn", title:"Black Friday",      note:"海外大促日 · 提前准备促销物料" },
-    { m:"12月", d:"25", cls:"bad",  title:"圣诞采购季",        note:"欧美圣诞备货 · 订单高峰" }
+  "shop": "豫能实业",
+  "shopEn": "YUNER INDUSTRIAL",
+  "updatedAt": "8/13 自动拉取",
+  "dateNote": "数据参谋 T-2 离线 · 最新完整日 8/11 · 订单实时",
+  "health": {
+    "text": "需关注 · 成交 0 单",
+    "level": "warn"
+  },
+  "calendar": [{
+      "m": "9月",
+      "d": "1",
+      "cls": "navy",
+      "title": "秋季备货启动",
+      "note": "Q4 旺季备货 · 检查库存与交期"
+    },
+    {
+      "m": "10月",
+      "d": "15",
+      "cls": "navy",
+      "title": "秋季广交会",
+      "note": "行业通用节点 · 可安排参展/直播"
+    },
+    {
+      "m": "11月",
+      "d": "27",
+      "cls": "warn",
+      "title": "Black Friday",
+      "note": "海外大促日 · 提前准备促销物料"
+    },
+    {
+      "m": "12月",
+      "d": "25",
+      "cls": "bad",
+      "title": "圣诞采购季",
+      "note": "欧美圣诞备货 · 订单高峰"
+    }
   ],
-
-  dims: {
-    // ================= 今日（8/10） =================
-    day: {
-      label:"今日", sub:"8月10日",
-      kpis: [
-        { name:"新增询盘",  value:"5",     delta:"↑2 vs 昨日",        cls:"ok" },
-        { name:"回复率",    value:"100%",  delta:"目标 ≥95%",         cls:"ok" },
-        { name:"今日曝光",  value:"1,874", delta:"↑140 vs 昨日",      cls:"" },
-        { name:"访客数",    value:"18",    delta:"同行优 59",         cls:"" },
-        { name:"TM咨询",    value:"4",     delta:"同行优 8",          cls:"" },
-        { name:"成交订单",  value:"0",     delta:"⚠ 今日 0 单",       cls:"bad" },
-        { name:"优品数",    value:"3",     delta:"⚠ 同行优 33",       cls:"warn" }
+  "dims": {
+    "day": {
+      "label": "今日",
+      "sub": "8月11日",
+      "kpis": [{
+          "name": "新增询盘",
+          "value": "1",
+          "delta": "↓1 vs 昨日",
+          "cls": ""
+        },
+        {
+          "name": "回复率",
+          "value": "100%",
+          "delta": "目标 ≥95%",
+          "cls": "ok"
+        },
+        {
+          "name": "今日曝光",
+          "value": "2,249",
+          "delta": "↑375 vs 昨日",
+          "cls": ""
+        },
+        {
+          "name": "访客数",
+          "value": "16",
+          "delta": "同行优 51",
+          "cls": ""
+        },
+        {
+          "name": "TM咨询",
+          "value": "2",
+          "delta": "同行优 7",
+          "cls": ""
+        },
+        {
+          "name": "成交订单",
+          "value": "0",
+          "delta": "⚠ 今日 0 单",
+          "cls": "bad"
+        },
+        {
+          "name": "优品数",
+          "value": "3",
+          "delta": "⚠ 同行优 34",
+          "cls": "warn"
+        }
       ],
-      trend: {
-        labels:["8/1","8/2","8/3","8/4","8/5","8/6","8/7","8/8","8/9","8/10"],
-        views:[1030,1289,629,669,729,1230,1393,1119,1734,1874],
-        clicks:[3,12,7,5,7,16,19,21,19,22]
+      "trend": {
+        "labels": ["8/2",
+          "8/3",
+          "8/4",
+          "8/5",
+          "8/6",
+          "8/7",
+          "8/8",
+          "8/9",
+          "8/10",
+          "8/11"
+        ],
+        "views": [1289,
+          629,
+          669,
+          729,
+          1230,
+          1393,
+          1119,
+          1734,
+          1874,
+          2249
+        ],
+        "clicks": [12,
+          7,
+          5,
+          7,
+          16,
+          19,
+          21,
+          19,
+          22,
+          10
+        ]
       },
-      p4p: [
-        { label:"P4P 状态",  value:"未投放",  status:"warn" },
-        { label:"P4P 曝光",  value:"0",       note:"同行日均 151" },
-        { label:"P4P 点击",  value:"0",       note:"同行日均 2" },
-        { label:"全站推曝光",value:"1,137",   note:"点击 31" },
-        { label:"搜索点击率",value:"2.11%",   status:"ok", note:"同行优 1.74%" }
+      "p4p": [{
+          "label": "P4P 状态",
+          "value": "未投放",
+          "status": "warn"
+        },
+        {
+          "label": "P4P 曝光",
+          "value": "0",
+          "note": "同行日均 125"
+        },
+        {
+          "label": "P4P 点击",
+          "value": "0",
+          "note": "同行日均 2"
+        },
+        {
+          "label": "全站推曝光",
+          "value": "1,768",
+          "note": "点击 21"
+        },
+        {
+          "label": "搜索点击率",
+          "value": "0.76%",
+          "status": "warn",
+          "note": "同行优 1.64%"
+        }
       ],
-      rank: [
-        { no:1, name:"LPG 撬装加注站",     val:38,  bar:100 },
-        { no:2, name:"LPG 灌装线(链式)",   val:15,  bar:39 },
-        { no:3, name:"LPG 钢瓶 3-5KG",     val:13,  bar:34 },
-        { no:4, name:"气动灌装秤系统",     val:13,  bar:34 },
-        { no:5, name:"LPG 泵 YQB2-5",      val:13,  bar:34 }
+      "rank": [{
+          "no": 1,
+          "name": "20m3 Underground LPG Tank",
+          "val": 6,
+          "bar": 100
+        },
+        {
+          "no": 2,
+          "name": "60cbm Industrial Gas Tank",
+          "val": 4,
+          "bar": 67
+        },
+        {
+          "no": 3,
+          "name": "ASME Underground LPG Tank 5m³",
+          "val": 4,
+          "bar": 67
+        },
+        {
+          "no": 4,
+          "name": "10 Cbm Underground Storage Tank",
+          "val": 4,
+          "bar": 67
+        },
+        {
+          "no": 5,
+          "name": "150cbm Pressure Vessel",
+          "val": 4,
+          "bar": 67
+        }
       ],
-      todos: [
-        { tag:"成交", level:"bad",  text:"今日 0 笔成交 · 询盘 5 个 · 建议加快询盘转化跟进" },
-        { tag:"广告", level:"warn", text:"P4P 未投放 · 同行日均曝光 151 · 建议开通小预算测试" },
-        { tag:"商品", level:"warn", text:"优品仅 3 个 · 同行优 33 个 · 有询盘商品仅 6 个" }
+      "todos": [{
+          "tag": "成交",
+          "level": "bad",
+          "text": "今日 0 笔成交 · 询盘 1 个 · 建议加快询盘转化跟进"
+        },
+        {
+          "tag": "广告",
+          "level": "warn",
+          "text": "搜索点击率 0.76%（昨日 2.11%）· P4P 未投放 · 建议小预算测试"
+        },
+        {
+          "tag": "商品",
+          "level": "warn",
+          "text": "优品仅 3 个 · 同行优 34 个 · 建议优化产品分层"
+        }
       ],
-      donut: { labels:["自然搜索","全站推","P4P"], data:[1044,1137,0], colors:["#f0a020","#fbd670","#fdf3e0"] },
-      team: {
-        focus: {
-          name:"yuner hn", role:"主力", status:"ok", statusText:"正常",
-          stats: { inq:2, ctr:"2.1%", conv:"0%", reply:"39 min" },
-          actions: [
-            { icon:"💬", text:"询盘处理：2 条 · 100% 回复 · 平均 39 分钟" },
-            { icon:"⚡", text:"5分钟回复率：81.4%（优于同行 79.2%）" },
-            { icon:"💬", text:"TM 咨询接待：4 条" },
-            { icon:"📦", text:"上新商品：31 个" },
-            { icon:"✏️", text:"修改商品：32 个" },
-            { icon:"📄", text:"已读 RFQ：0 条" },
-            { icon:"📋", text:"起草订单：0 笔" },
-            { icon:"👁️", text:"曝光 1,044 · 点击 22" }
+      "donut": {
+        "labels": ["自然搜索",
+          "全站推",
+          "P4P"
+        ],
+        "data": [1308,
+          1768,
+          0
+        ],
+        "colors": ["#f0a020",
+          "#fbd670",
+          "#fdf3e0"
+        ]
+      },
+      "team": {
+        "focus": {
+          "name": "yuner hn",
+          "role": "主力",
+          "status": "ok",
+          "statusText": "正常",
+          "stats": {
+            "inq": 1,
+            "ctr": "0.8%",
+            "conv": "0%",
+            "reply": "29 min"
+          },
+          "actions": [{
+              "icon": "💬",
+              "text": "询盘处理：1 条 · 100% 回复 · 平均 29 分钟"
+            },
+            {
+              "icon": "⚡",
+              "text": "5分钟回复率：83.0%（优于同行优 78.9%）"
+            },
+            {
+              "icon": "💬",
+              "text": "TM 咨询接待：2 条"
+            },
+            {
+              "icon": "📦",
+              "text": "上新商品：20 个"
+            },
+            {
+              "icon": "✏️",
+              "text": "修改商品：70 个"
+            },
+            {
+              "icon": "📄",
+              "text": "已读 RFQ：1 条"
+            },
+            {
+              "icon": "📋",
+              "text": "起草订单：0 笔"
+            },
+            {
+              "icon": "👁️",
+              "text": "曝光 1,308 · 点击 10"
+            }
           ]
         },
-        liu: { name:"Liu Guoling", log:["今日暂无工作记录（曝光 0 · 询盘 0 · 上新 0）", "说明：数据 T-2 延迟 · 当天上传动作 2 天后显示 · 发布成功后才计入"] }
+        "liu": {
+          "name": "Liu Guoling",
+          "log": ["今日暂无工作记录（曝光 0 · 询盘 0 · 上新 0）",
+            "说明：数据 T-2 延迟 · 当天上传动作 2 天后显示 · 发布成功后才计入"
+          ]
+        }
       },
-      products: [
-        { name:"LPG 撬装加注站",   price:"$10,890",  view:38,  click:0,  inq:1,  status:"ok",  statusText:"有询盘" },
-        { name:"LPG 灌装线(链式)", price:"$180,000", view:15,  click:4,  inq:0,  status:"ok",  statusText:"橱窗" },
-        { name:"LPG 钢瓶 3-5KG",   price:"$7.8",     view:13,  click:0,  inq:0,  status:"ok",  statusText:"潜力优品" },
-        { name:"气动灌装秤系统",   price:"$4,800",   view:13,  click:0,  inq:1,  status:"ok",  statusText:"有询盘" }
+      "products": [{
+          "name": "20m3 Underground LPG Tank",
+          "price": "$3,250",
+          "view": 6,
+          "click": 0,
+          "inq": 0,
+          "status": "ok",
+          "statusText": "优品"
+        },
+        {
+          "name": "60cbm Industrial Gas Tank",
+          "price": "$17,142–$18,286",
+          "view": 4,
+          "click": 0,
+          "inq": 0,
+          "status": "ok",
+          "statusText": "优品"
+        },
+        {
+          "name": "ASME Underground LPG Tank 5m³",
+          "price": "$3,250",
+          "view": 4,
+          "click": 0,
+          "inq": 0,
+          "status": "ok",
+          "statusText": "优品·橱窗"
+        },
+        {
+          "name": "10 Cbm Underground Storage Tank",
+          "price": "$5,857–$5,900",
+          "view": 4,
+          "click": 0,
+          "inq": 0,
+          "status": "ok",
+          "statusText": "优品"
+        }
       ],
-      progress: [
-        { name:"今日上新商品", pct:100 },
-        { name:"今日修改商品", pct:100 }
+      "progress": [{
+          "name": "今日上新商品 · 20 个",
+          "pct": 100
+        },
+        {
+          "name": "今日修改商品 · 70 个",
+          "pct": 100
+        }
       ]
     },
-
-    // ================= 本周（8/4-8/10） =================
-    week: {
-      label:"本周", sub:"8/4 – 8/10",
-      kpis: [
-        { name:"新增询盘",  value:"18",    delta:"日均 2.6 · 同行优 31", cls:"ok" },
-        { name:"回复率",    value:"100%",  delta:"目标 ≥95%",           cls:"ok" },
-        { name:"本周曝光",  value:"8,748", delta:"同行优 30,118",       cls:"" },
-        { name:"访客数",    value:"100",   delta:"同行优 349",          cls:"" },
-        { name:"TM咨询",    value:"16",    delta:"同行优 28",           cls:"" },
-        { name:"成交订单",  value:"0",     delta:"⚠ 7天合计 0 单",      cls:"bad" },
-        { name:"起草订单",  value:"1",     delta:"待推进成单",          cls:"warn" }
+    "week": {
+      "label": "本周",
+      "sub": "8/5 – 8/11",
+      "kpis": [{
+          "name": "新增询盘",
+          "value": "6",
+          "delta": "上周 0 · 同行优 9",
+          "cls": "ok"
+        },
+        {
+          "name": "回复率",
+          "value": "100%",
+          "delta": "目标 ≥95%",
+          "cls": "ok"
+        },
+        {
+          "name": "本周曝光",
+          "value": "10,328",
+          "delta": "↑3,009 vs 上周",
+          "cls": ""
+        },
+        {
+          "name": "访客数",
+          "value": "115",
+          "delta": "同行优 330",
+          "cls": ""
+        },
+        {
+          "name": "TM咨询",
+          "value": "18",
+          "delta": "同行优 23",
+          "cls": ""
+        },
+        {
+          "name": "成交订单",
+          "value": "0",
+          "delta": "⚠ 7天合计 0 单",
+          "cls": "bad"
+        },
+        {
+          "name": "起草订单",
+          "value": "1",
+          "delta": "待推进成单",
+          "cls": "warn"
+        }
       ],
-      trend: {
-        labels:["8/4","8/5","8/6","8/7","8/8","8/9","8/10"],
-        views:[669,729,1230,1393,1119,1734,1874],
-        clicks:[5,7,16,19,21,19,22]
+      "trend": {
+        "labels": ["8/5",
+          "8/6",
+          "8/7",
+          "8/8",
+          "8/9",
+          "8/10",
+          "8/11"
+        ],
+        "views": [729,
+          1230,
+          1393,
+          1119,
+          1734,
+          1874,
+          2249
+        ],
+        "clicks": [7,
+          16,
+          19,
+          21,
+          19,
+          22,
+          10
+        ]
       },
-      p4p: [
-        { label:"P4P 状态",  value:"未投放",  status:"warn" },
-        { label:"P4P 曝光",  value:"0",       note:"同行周均 1,147" },
-        { label:"全站推曝光",value:"5,735",   note:"点击 152" },
-        { label:"搜索点击率",value:"2.24%",   status:"ok", note:"同行优 1.70%" },
-        { label:"访客询盘率",value:"8.0%",    status:"ok", note:"同行均 5.5%" }
+      "p4p": [{
+          "label": "P4P 状态",
+          "value": "未投放",
+          "status": "warn"
+        },
+        {
+          "label": "P4P 曝光",
+          "value": "0",
+          "note": "同行周均 1,186"
+        },
+        {
+          "label": "全站推曝光",
+          "value": "7,126",
+          "note": "点击 158"
+        },
+        {
+          "label": "搜索点击率",
+          "value": "1.95%",
+          "status": "ok",
+          "note": "同行优 1.72%"
+        },
+        {
+          "label": "访客询盘率",
+          "value": "5.2%",
+          "note": "同行均 5.8%"
+        }
       ],
-      rank: [
-        { no:1, name:"LPG 加液机",         val:255, bar:100 },
-        { no:2, name:"5T 撬装加注站",      val:223, bar:87 },
-        { no:3, name:"LPG 输送泵 5.5KW",   val:182, bar:71 },
-        { no:4, name:"30m³ 撬装加注站",    val:134, bar:53 },
-        { no:5, name:"10m³ 撬装加注站",    val:107, bar:42 }
+      "rank": [{
+          "no": 1,
+          "name": "20m3 Underground LPG Tank",
+          "val": 6,
+          "bar": 100
+        },
+        {
+          "no": 2,
+          "name": "60cbm Industrial Gas Tank",
+          "val": 4,
+          "bar": 67
+        },
+        {
+          "no": 3,
+          "name": "ASME Underground LPG Tank 5m³",
+          "val": 4,
+          "bar": 67
+        },
+        {
+          "no": 4,
+          "name": "10 Cbm Underground Storage Tank",
+          "val": 4,
+          "bar": 67
+        },
+        {
+          "no": 5,
+          "name": "150cbm Pressure Vessel",
+          "val": 4,
+          "bar": 67
+        }
       ],
-      todos: [
-        { tag:"成交", level:"bad",  text:"本周 0 笔成交 · 18 个询盘 · 转化是最大问题" },
-        { tag:"广告", level:"warn", text:"P4P 未投放 · 同行周均曝光 1,147 · 流量靠自然+全站推" },
-        { tag:"商品", level:"warn", text:"优品仅 3 个 · 有询盘商品 26 个 · 建议分层优化" }
+      "todos": [{
+          "tag": "成交",
+          "level": "bad",
+          "text": "本周 0 笔成交 · 6 个询盘 · 转化是最大问题"
+        },
+        {
+          "tag": "广告",
+          "level": "warn",
+          "text": "P4P 未投放 · 同行周均曝光 1,186 · 流量靠自然+全站推"
+        },
+        {
+          "tag": "商品",
+          "level": "warn",
+          "text": "优品仅 3 个 · 同行优 34 个 · 建议分层优化"
+        }
       ],
-      donut: { labels:["自然搜索","全站推","P4P"], data:[4859,5735,0], colors:["#f0a020","#fbd670","#fdf3e0"] },
-      team: {
-        focus: {
-          name:"yuner hn", role:"主力", status:"ok", statusText:"正常",
-          stats: { inq:2, ctr:"2.2%", conv:"0%", reply:"47 min" },
-          actions: [
-            { icon:"💬", text:"询盘处理：2 条 · 100% 回复 · 平均 47 分钟" },
-            { icon:"⚡", text:"5分钟回复率：82.9%（优于同行 79.2%）" },
-            { icon:"💬", text:"TM 咨询接待：13 条" },
-            { icon:"📦", text:"上新商品：180 个" },
-            { icon:"✏️", text:"修改商品：197 个" },
-            { icon:"📄", text:"已读 RFQ：3 条" },
-            { icon:"📋", text:"起草订单：1 笔" },
-            { icon:"👁️", text:"曝光 3,904 · 点击 87" }
+      "donut": {
+        "labels": ["自然搜索",
+          "全站推",
+          "P4P"
+        ],
+        "data": [5856,
+          7126,
+          0
+        ],
+        "colors": ["#f0a020",
+          "#fbd670",
+          "#fdf3e0"
+        ]
+      },
+      "team": {
+        "focus": {
+          "name": "yuner hn",
+          "role": "主力",
+          "status": "ok",
+          "statusText": "正常",
+          "stats": {
+            "inq": 6,
+            "ctr": "1.9%",
+            "conv": "0%",
+            "reply": "29 min"
+          },
+          "actions": [{
+              "icon": "💬",
+              "text": "询盘处理：6 条 · 100% 回复 · 平均 29 分钟"
+            },
+            {
+              "icon": "⚡",
+              "text": "5分钟回复率：83.0%（优于同行优 78.9%）"
+            },
+            {
+              "icon": "💬",
+              "text": "TM 咨询接待：18 条"
+            },
+            {
+              "icon": "📦",
+              "text": "上新商品：138 个"
+            },
+            {
+              "icon": "✏️",
+              "text": "修改商品：210 个"
+            },
+            {
+              "icon": "📄",
+              "text": "已读 RFQ：4 条"
+            },
+            {
+              "icon": "📋",
+              "text": "起草订单：1 笔"
+            },
+            {
+              "icon": "👁️",
+              "text": "曝光 5,856 · 点击 114"
+            }
           ]
         },
-        liu: { name:"Liu Guoling", log:["本周暂无工作记录（曝光 0 · 询盘 0 · 上新 0）", "说明：数据 T-2 延迟 · 上传动作 2 天后显示 · 发布成功后才计入"] }
+        "liu": {
+          "name": "Liu Guoling",
+          "log": ["本周暂无工作记录（曝光 0 · 询盘 0 · 上新 0）",
+            "说明：数据 T-2 延迟 · 上传动作 2 天后显示 · 发布成功后才计入"
+          ]
+        }
       },
-      products: [
-        { name:"LPG 加液机",          price:"$3,110",   view:255, click:0, inq:"—", status:"ok", statusText:"潜力优品" },
-        { name:"5T 撬装加注站",       price:"$13,365",  view:223, click:2, inq:"—", status:"ok", statusText:"潜力优品" },
-        { name:"LPG 输送泵 5.5KW",    price:"$4,040",   view:182, click:0, inq:"—", status:"ok", statusText:"潜力优品" },
-        { name:"30m³ 撬装加注站",     price:"$9,900",   view:134, click:1, inq:"—", status:"ok", statusText:"潜力优品" }
+      "products": [{
+          "name": "20m3 Underground LPG Tank",
+          "price": "$3,250",
+          "view": 6,
+          "click": 0,
+          "inq": 0,
+          "status": "ok",
+          "statusText": "优品"
+        },
+        {
+          "name": "60cbm Industrial Gas Tank",
+          "price": "$17,142–$18,286",
+          "view": 4,
+          "click": 0,
+          "inq": 0,
+          "status": "ok",
+          "statusText": "优品"
+        },
+        {
+          "name": "ASME Underground LPG Tank 5m³",
+          "price": "$3,250",
+          "view": 4,
+          "click": 0,
+          "inq": 0,
+          "status": "ok",
+          "statusText": "优品·橱窗"
+        },
+        {
+          "name": "10 Cbm Underground Storage Tank",
+          "price": "$5,857–$5,900",
+          "view": 4,
+          "click": 0,
+          "inq": 0,
+          "status": "ok",
+          "statusText": "优品"
+        }
       ],
-      progress: [
-        { name:"本周上新商品", pct:100 },
-        { name:"本周修改商品", pct:100 }
+      "progress": [{
+          "name": "本周上新商品 · 138 个",
+          "pct": 100
+        },
+        {
+          "name": "本周修改商品 · 210 个",
+          "pct": 100
+        }
       ]
     },
-
-    // ================= 本月（7/12-8/10） =================
-    month: {
-      label:"本月", sub:"7/12 – 8/10",
-      kpis: [
-        { name:"新增询盘",  value:"34",    delta:"日均 1.1 · 同行优 93", cls:"ok" },
-        { name:"回复率",    value:"100%",  delta:"目标 ≥95%",           cls:"ok" },
-        { name:"本月曝光",  value:"21,654",delta:"同行优 100,275",      cls:"" },
-        { name:"访客数",    value:"251",   delta:"同行优 1,262",        cls:"" },
-        { name:"TM咨询",    value:"31",    delta:"同行优 79",           cls:"" },
-        { name:"成交订单",  value:"0",     delta:"⚠ 30天合计 0 单",     cls:"bad" },
-        { name:"起草订单",  value:"1",     delta:"待推进成单",          cls:"warn" }
+    "month": {
+      "label": "本月",
+      "sub": "7/13 – 8/11",
+      "kpis": [{
+          "name": "新增询盘",
+          "value": "9",
+          "delta": "日均 0.3 · 同行优 39",
+          "cls": ""
+        },
+        {
+          "name": "回复率",
+          "value": "100%",
+          "delta": "目标 ≥95%",
+          "cls": "ok"
+        },
+        {
+          "name": "本月曝光",
+          "value": "23,622",
+          "delta": "同行优 90,497",
+          "cls": ""
+        },
+        {
+          "name": "访客数",
+          "value": "289",
+          "delta": "同行优 1,329",
+          "cls": ""
+        },
+        {
+          "name": "TM咨询",
+          "value": "45",
+          "delta": "同行优 82",
+          "cls": ""
+        },
+        {
+          "name": "成交订单",
+          "value": "0",
+          "delta": "⚠ 30天合计 0 单",
+          "cls": "bad"
+        },
+        {
+          "name": "起草订单",
+          "value": "1",
+          "delta": "待推进成单",
+          "cls": "warn"
+        }
       ],
-      trend: {
-        labels:["8/1","8/2","8/3","8/4","8/5","8/6","8/7","8/8","8/9","8/10"],
-        views:[1030,1289,629,669,729,1230,1393,1119,1734,1874],
-        clicks:[3,12,7,5,7,16,19,21,19,22]
+      "trend": {
+        "labels": ["7/13",
+          "7/14",
+          "7/15",
+          "7/16",
+          "7/17",
+          "7/18",
+          "7/19",
+          "7/20",
+          "7/21",
+          "7/22",
+          "7/23",
+          "7/24",
+          "7/25",
+          "7/26",
+          "7/27",
+          "7/28",
+          "7/29",
+          "7/30",
+          "7/31",
+          "8/1",
+          "8/2",
+          "8/3",
+          "8/4",
+          "8/5",
+          "8/6",
+          "8/7",
+          "8/8",
+          "8/9",
+          "8/10",
+          "8/11"
+        ],
+        "views": [184,
+          155,
+          207,
+          168,
+          268,
+          230,
+          221,
+          258,
+          387,
+          311,
+          616,
+          348,
+          314,
+          332,
+          816,
+          1160,
+          1417,
+          964,
+          1321,
+          1030,
+          1289,
+          629,
+          669,
+          729,
+          1230,
+          1393,
+          1119,
+          1734,
+          1874,
+          2249
+        ],
+        "clicks": [0,
+          1,
+          0,
+          1,
+          3,
+          3,
+          4,
+          3,
+          6,
+          5,
+          4,
+          6,
+          5,
+          10,
+          9,
+          5,
+          6,
+          12,
+          8,
+          3,
+          12,
+          7,
+          5,
+          7,
+          16,
+          19,
+          21,
+          19,
+          22,
+          10
+        ]
       },
-      p4p: [
-        { label:"P4P 状态",  value:"未投放",  status:"warn" },
-        { label:"P4P 曝光",  value:"0",       note:"同行月均 3,864" },
-        { label:"全站推曝光",value:"11,204",  note:"点击 275" },
-        { label:"搜索点击率",value:"1.81%",   status:"ok", note:"同行优 1.77%" },
-        { label:"访客询盘率",value:"5.6%",    status:"ok", note:"同行均 4.0%" }
+      "p4p": [{
+          "label": "P4P 状态",
+          "value": "未投放",
+          "status": "warn"
+        },
+        {
+          "label": "P4P 曝光",
+          "value": "0",
+          "note": "同行月均 7,306"
+        },
+        {
+          "label": "全站推曝光",
+          "value": "12,972",
+          "note": "点击 296"
+        },
+        {
+          "label": "搜索点击率",
+          "value": "1.70%",
+          "note": "同行优 2.01%"
+        },
+        {
+          "label": "访客询盘率",
+          "value": "3.1%",
+          "status": "warn",
+          "note": "同行均 5.1%"
+        }
       ],
-      rank: [
-        { no:1, name:"LPG 加液机",         val:370, bar:100 },
-        { no:2, name:"LPG 输送泵 5.5KW",   val:292, bar:79 },
-        { no:3, name:"双枪加液机",         val:216, bar:58 },
-        { no:4, name:"10m³ 撬装加注站",    val:152, bar:41 },
-        { no:5, name:"单枪加液机",         val:142, bar:38 }
+      "rank": [{
+          "no": 1,
+          "name": "20m3 Underground LPG Tank",
+          "val": 6,
+          "bar": 100
+        },
+        {
+          "no": 2,
+          "name": "60cbm Industrial Gas Tank",
+          "val": 4,
+          "bar": 67
+        },
+        {
+          "no": 3,
+          "name": "ASME Underground LPG Tank 5m³",
+          "val": 4,
+          "bar": 67
+        },
+        {
+          "no": 4,
+          "name": "10 Cbm Underground Storage Tank",
+          "val": 4,
+          "bar": 67
+        },
+        {
+          "no": 5,
+          "name": "150cbm Pressure Vessel",
+          "val": 4,
+          "bar": 67
+        }
       ],
-      todos: [
-        { tag:"成交", level:"bad",  text:"30 天 0 笔成交 · 34 个询盘 · 转化链路需重点排查" },
-        { tag:"广告", level:"warn", text:"P4P 未投放 · 全站推曝光 11,204 · 建议补 P4P 流量" },
-        { tag:"商品", level:"warn", text:"优品 3 个 · 有询盘商品 58 个 · 同行优 33 个优品" }
+      "todos": [{
+          "tag": "成交",
+          "level": "bad",
+          "text": "30 天 0 笔成交 · 9 个询盘 · 转化链路需重点排查"
+        },
+        {
+          "tag": "广告",
+          "level": "warn",
+          "text": "P4P 未投放 · 全站推曝光 12,972 · 建议补 P4P 流量"
+        },
+        {
+          "tag": "商品",
+          "level": "warn",
+          "text": "优品 3 个 · 同行优 34 个优品 · 建议分层优化"
+        }
       ],
-      donut: { labels:["自然搜索","全站推","P4P"], data:[12432,11204,0], colors:["#f0a020","#fbd670","#fdf3e0"] },
-      team: {
-        focus: {
-          name:"yuner hn", role:"主力", status:"ok", statusText:"正常",
-          stats: { inq:5, ctr:"1.8%", conv:"0%", reply:"111 min" },
-          actions: [
-            { icon:"💬", text:"询盘处理：5 条 · 100% 回复 · 平均 111 分钟" },
-            { icon:"⚡", text:"5分钟回复率：75.0%" },
-            { icon:"💬", text:"TM 咨询接待：21 条" },
-            { icon:"📦", text:"上新商品：441 个" },
-            { icon:"✏️", text:"修改商品：1,019 个" },
-            { icon:"📄", text:"已读 RFQ：15 条" },
-            { icon:"📋", text:"起草订单：0 笔" },
-            { icon:"👁️", text:"曝光 7,257 · 点击 114" }
+      "donut": {
+        "labels": ["自然搜索",
+          "全站推",
+          "P4P"
+        ],
+        "data": [13608,
+          12972,
+          0
+        ],
+        "colors": ["#f0a020",
+          "#fbd670",
+          "#fdf3e0"
+        ]
+      },
+      "team": {
+        "focus": {
+          "name": "yuner hn",
+          "role": "主力",
+          "status": "ok",
+          "statusText": "正常",
+          "stats": {
+            "inq": 9,
+            "ctr": "1.7%",
+            "conv": "0%",
+            "reply": "29 min"
+          },
+          "actions": [{
+              "icon": "💬",
+              "text": "询盘处理：9 条 · 100% 回复 · 平均 29 分钟"
+            },
+            {
+              "icon": "⚡",
+              "text": "5分钟回复率：83.0%（优于同行优 78.9%）"
+            },
+            {
+              "icon": "💬",
+              "text": "TM 咨询接待：42 条"
+            },
+            {
+              "icon": "📦",
+              "text": "上新商品：518 个"
+            },
+            {
+              "icon": "✏️",
+              "text": "修改商品：827 个"
+            },
+            {
+              "icon": "📄",
+              "text": "已读 RFQ：16 条"
+            },
+            {
+              "icon": "📋",
+              "text": "起草订单：1 笔"
+            },
+            {
+              "icon": "👁️",
+              "text": "曝光 13,608 · 点击 232"
+            }
           ]
         },
-        liu: { name:"Liu Guoling", log:["本月暂无工作记录（曝光 0 · 询盘 0 · 上新 0）", "说明：数据 T-2 延迟 · 上传动作 2 天后显示 · 发布成功后才计入"] }
+        "liu": {
+          "name": "Liu Guoling",
+          "log": ["本月暂无工作记录（曝光 0 · 询盘 0 · 上新 0）",
+            "说明：数据 T-2 延迟 · 上传动作 2 天后显示 · 发布成功后才计入"
+          ]
+        }
       },
-      products: [
-        { name:"LPG 加液机",          price:"$3,110",   view:370, click:1, inq:"—", status:"ok", statusText:"潜力优品" },
-        { name:"LPG 输送泵 5.5KW",    price:"$4,040",   view:292, click:1, inq:"—", status:"ok", statusText:"潜力优品" },
-        { name:"双枪加液机",          price:"$2,610",   view:216, click:0, inq:"—", status:"ok", statusText:"优品" },
-        { name:"10m³ 撬装加注站",     price:"$14,850",  view:152, click:1, inq:"—", status:"ok", statusText:"潜力优品" }
+      "products": [{
+          "name": "20m3 Underground LPG Tank",
+          "price": "$3,250",
+          "view": 6,
+          "click": 0,
+          "inq": 0,
+          "status": "ok",
+          "statusText": "优品"
+        },
+        {
+          "name": "60cbm Industrial Gas Tank",
+          "price": "$17,142–$18,286",
+          "view": 4,
+          "click": 0,
+          "inq": 0,
+          "status": "ok",
+          "statusText": "优品"
+        },
+        {
+          "name": "ASME Underground LPG Tank 5m³",
+          "price": "$3,250",
+          "view": 4,
+          "click": 0,
+          "inq": 0,
+          "status": "ok",
+          "statusText": "优品·橱窗"
+        },
+        {
+          "name": "10 Cbm Underground Storage Tank",
+          "price": "$5,857–$5,900",
+          "view": 4,
+          "click": 0,
+          "inq": 0,
+          "status": "ok",
+          "statusText": "优品"
+        }
       ],
-      progress: [
-        { name:"本月上新商品", pct:100 },
-        { name:"本月修改商品", pct:100 }
+      "progress": [{
+          "name": "本月上新商品 · 518 个",
+          "pct": 100
+        },
+        {
+          "name": "本月修改商品 · 827 个",
+          "pct": 100
+        }
       ]
     }
   }
